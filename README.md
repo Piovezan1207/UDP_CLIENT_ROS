@@ -31,3 +31,6 @@ ros2 run udp_client client<br>
 <b>Para testar com o turtleSim, apenas inicie um turtle node e mova a caneta para verificar se haverá resposta:</b>
 <br>
 ros2 run turtlesim turtlesim_node<br>
+
+<b>Referência:</b><br>
+https://docs.ros.org/en/galactic/Tutorials/Writing-A-Simple-Py-Publisher-And-Subscriber.html
