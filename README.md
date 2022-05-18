@@ -3,7 +3,7 @@ ROS node UDP client
 </h1>
 
 <p>
-Esse pacote irá receber as posições de um dispositivo háptico via UDP, então aplicara esses valores no turtleSim para exemplificar uma comunicação via ROS.
+Esse pacote irá receber as posições de um dispositivo háptico via UDP, então aplicará esses valores no turtleSim para exemplificar uma comunicação via ROS.
 </p>
 
 <br>
@@ -18,7 +18,7 @@ String:    {0.0000|0.0000|0.0000|0.0000|0.0000|0.0000}<br>
 Instalação: https://docs.ros.org/en/galactic/Installation.html<br>
 Executar o ROS2: call C:\dev\ros2_foxy\local_setup.bat<br>
 
-<b>Criando pacote:</b>
+<b>Construindo pacote:</b>
 <br>
 Na pasta do projeto: <br>
 colcon build --merge-install --packages-select udp_client<br>
@@ -28,6 +28,6 @@ call install/setup.bat<br>
 <br>
 ros2 run udp_client client<br>
 
-<b>Para testar com o turtleSim, apenas inicie um turtle node:</b>
+<b>Para testar com o turtleSim, apenas inicie um turtle node e mova a caneta para verificar se haverá resposta:</b>
 <br>
 ros2 run turtlesim turtlesim_node<br>
