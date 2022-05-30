@@ -5,7 +5,8 @@
 
 #Biblioteca para conexão UDP
 from platform import node
-import socket
+from socket import *
+
 
 #Bibliotecas para uso do ROS
 import rclpy
@@ -15,11 +16,13 @@ import geometry_msgs.msg
 
 
 #Função para iniciar conexão de cliente UDP
-def connectUDP(ip = '127.0.0.1', port = 27015):
+def connectUDP(ip = '', port = 45123):
     try:
-        #Tenta conectar com o servidor
-        UDPClientSocket = socket.create_connection((ip, port))
-        print("Conectado ao server UDP.")
+        #Tenta conectar com o servidor  
+        UDPClientSocket=socket(AF_INET, SOCK_DGRAM)
+        UDPClientSocket.bind((ip,45123))
+
+        print("Bind socket ok.")
     except:
         print("Erro ao conectar com o server UDP.")
         exit()
@@ -65,20 +68,14 @@ class MinimalPublisher(Node):
     #Função que irá receber os valores via UDP:
         #Em primeiro momento, os valores vão vir em um string, separados pelo caractere '|'
         #Exemplo:   x      y      z       X ang. Y ang. Z ang.
-        #           {0.0000|0.0000|0.0000|0.0000|0.0000|0.0000}
+        #           0.0000|0.0000|0.0000|0.0000|0.0000|0.0000
 
     def recive_udp(self, bufferSize):
         value = self.UDPClientSocket.recvfrom(bufferSize) #Recebe o valor
         decodeValue = value[0].decode("utf-8") #Faz a decodificação, transformando em string
-        # print(value)
-        #Trecho responsável por verificar a intgridade da string esperada, caso não esteja nos conformes, esse pacote é ignorado
-        keyA, keyB = decodeValue.find("{") , decodeValue.find("}")
-        if not (keyA == 0 and keyB == len(decodeValue)-1):
-            return False, False
-
-        fullValueString = decodeValue[keyA+1:keyB] 
-        splitedValue = fullValueString.split("|")  #Faz o split da string separando em um vetor 
-        treaties_axis_values = self.treatAxisValues(splitedValue)
+        replacedValue = decodeValue.replace("," , ".") #Substirui as virgulas por ponto, para que a conversão de string paat float funcione
+        splitedValue = replacedValue.split("|")  #Faz o split da string separando em um vetor 
+        treaties_axis_values = self.treatAxisValues(splitedValue) #Aplica um tratamento nos valores dos eixos
         return True , treaties_axis_values #Retorrna valores splitados
 
     #Método para publicar os valores recebidos e tratados, por ROS, no tópico específicado a cima
