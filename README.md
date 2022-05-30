@@ -10,8 +10,10 @@ Esse pacote irá receber as posições de um dispositivo háptico via UDP, entã
 
 <b>A aplicação espera uma string com os valores de posição dos 6 eixos da caneta, no seguinte formato:</b>
 <br>
-Descrição:  x      y      z      X ang. Y ang. Z ang.<br>
-String:    0.0000|0.0000|0.0000|0.0000|0.0000|0.0000<br>
+
+Descrição: x | y | z | X ang. | Y ang. | Z ang.<br>
+String: 0.0000|0.0000|0.0000|0.0000|0.0000|0.0000<br>
+
 
 <b>Parar fazer esse pacote, instalar e executar o ROS2.</b>
 <br>
